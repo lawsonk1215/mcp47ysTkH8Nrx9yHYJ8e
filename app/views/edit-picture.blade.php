@@ -49,10 +49,16 @@
 
                                     <select multiple="multiple" name="people[]" id="form-field-select-4" class="chosen-select">
                                         @foreach($family as $familyId => $familyName)
-                                        <option value="{{ $familyId }}">{{ $familyName }}</option>
+                                        <option value="{{ $familyId }}"
                                             @foreach($picture->people as $personId => $personName)
+                                                @if ($personId === $familyId)
+                                                    selected="selected"
 
+                                                @endif
                                             @endforeach
+
+                                        >{{ $familyName }}</option>
+                                            
                                         @endforeach
                                     </select>
                                 </div>
