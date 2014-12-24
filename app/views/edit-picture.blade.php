@@ -40,14 +40,12 @@
 
                         @include('flash::message')
 
-                        {{ Form::open() }}
+                        {{ Form::model($picture, ['route' => ['edit_picture_path', $picture->id]]) }}
 
                                 <div>
                                     <label for="form-field-select-4">Who's in it?</label>
 
                                     <div class="space-2"></div>
-
-
 
                                     {{ Form::select('people[]', $family, $picture->people->lists('person_id'), ['multiple' => '', 'class' => 'chosen-select', 'id' => 'form-field-select-4']) }}
                                 </div>
@@ -57,7 +55,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <label for="description">Add a description?</label>
-                                        <input name="description" type="text" class="form-control"/>
+                                        <input name="description" type="text" class="form-control" value="{{ $picture->description }}"/>
                                     </div>
                                 </div>
 
@@ -68,7 +66,7 @@
 
                             <div class="space-20"></div>
 
-                            {{ Form::open() }}
+                            {{ Form::model($picture, ['route' => ['delete_picture_path', $picture->id]]) }}
 
                                 {{ Form::submit('Delete Picture', ['class'=>'btn btn-block btn-danger']) }}
 

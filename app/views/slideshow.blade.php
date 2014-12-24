@@ -59,6 +59,11 @@
                     </div>
                 </div>
 
+                    <audio controls style="width:100%;" preload="auto" oncanplaythrough="this.play();">
+                        <source src="{{ asset('assets/audio/beatles.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+
             </div>
         </div>
 

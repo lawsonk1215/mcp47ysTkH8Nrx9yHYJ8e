@@ -46,6 +46,8 @@
 
                 <div class="space-20"></div>
 
+                @include('flash::message')
+
                 <div class="row clear">
                   <ul id="gallery-container" class="ace-thumbnails clearfix">
 
@@ -54,7 +56,7 @@
                       <a href="/images/pictures/{{ $picture->id }}.jpg" data-rel="colorbox">
                         <img width="150" src="/images/pictures/{{ $picture->id }}.jpg" />
                         <div class="text">
-                          <div class="inner">Sample Caption on Hover</div>
+                          <div class="inner">{{ $picture->description }}</div>
                         </div>
                       </a>
 

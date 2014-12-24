@@ -16,9 +16,9 @@ class CreatePersonPictureTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('person_id')->unsigned();
-			$table->foreign('person_id')->references('id')->on('people');
+			$table->foreign('person_id')->references('id')->on('people')->onDelete('cascade');
 			$table->integer('picture_id')->unsigned();
-			$table->foreign('picture_id')->references('id')->on('pictures');
+			$table->foreign('picture_id')->references('id')->on('pictures')->onDelete('cascade');
 		});
 	}
 

@@ -67,7 +67,7 @@ class PictureController extends \BaseController {
 		elseif (! $file->isValid())
 			return Redirect::back()->withErrors('Invalid file');
 
-		if (count($input['people']))
+		if (!isset($input['people']) || !count($input['people']))
 		{
 			return Redirect::back()->withErrors('You didn\'t add any family members to it..');
 		}
@@ -133,7 +133,23 @@ class PictureController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+
+		if (!isset($input['people']) || !count($input['people']))
+		{
+			return Redirect::back()->withErrors('You didn\'t add any family members to it..');
+		}
+
+		$picture = Picture::find($id);
+		$picture->description = $input['description'];
+		$picture->save();
+
+		Flash::success('Your picture was updated!');
+
+		$picture->people()->sync($input['people']);
+
+
+		return Redirect::back();
 	}
 
 	/**
@@ -145,7 +161,12 @@ class PictureController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$picture = Picture::find($id);
+		$picture->delete();
+
+		Flash::message('The picture was removed.');
+
+		return Redirect::to('gallery');
 	}
 
 }

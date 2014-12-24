@@ -51,13 +51,21 @@ Route::get('/defaultsite', function()
 /**
  * Login Form
  */
-Route::get('/login', [
-	'as' => 'login_path',
-	'uses' => 'SessionsController@create'
-]);
+Route::group(['before' => 'guest'], function()
+{
+	Route::get('/login', [
+		'as' => 'login_path',
+		'uses' => 'SessionsController@create'
+	]);
 
-Route::post('/login', [
-	'uses' => 'SessionsController@store'
+	Route::post('/login', [
+		'uses' => 'SessionsController@store'
+	]);
+
+});
+
+Route::get('/logout', [
+	'uses' => 'SessionsController@destroy'
 ]);
 
 
@@ -76,31 +84,47 @@ Route::post('/gallery', [
 ]);
 
 /********************** Add Picture Routes ************************/
-Route::get('/add-pictures', [
-	'uses' => 'PictureController@create'
-]);
+Route::group(['before' => 'auth'], function()
+{
+	Route::get('/add-pictures', [
+		'uses' => 'PictureController@create'
+	]);
 
 
-Route::post('/add-pictures', [
-	'uses' => 'PictureController@store'
-]);
+	Route::post('/add-pictures', [
+		'uses' => 'PictureController@store'
+	]);
 
 
-Route::get('/gallery/{id}/edit', [
-	'uses' => 'PictureController@edit'
-]);
+	Route::get('/gallery/{id}/edit', [
+		'uses' => 'PictureController@edit'
+	]);
 
 
-Route::post('/add-pictures', [
-	'uses' => 'PictureController@store'
-]);
+	Route::post('/gallery/{id}/edit', [
+		'as'   => 'edit_picture_path',
+		'uses' => 'PictureController@update'
+	]);
 
 
-/********************** Add Family Routes ************************/
-Route::get('/add-family', [
-	'uses' => 'PeopleController@create'
-]);
+	Route::post('/gallery/{id}/delete', [
+		'as'   => 'delete_picture_path',
+		'uses' => 'PictureController@destroy'
+	]);
 
-Route::post('/add-family', [
-	'uses' => 'PeopleController@store'
-]);
+
+	Route::post('/add-pictures', [
+		'uses' => 'PictureController@store'
+	]);
+
+
+	/********************** Add Family Routes ************************/
+	Route::get('/add-family', [
+		'uses' => 'PeopleController@create'
+	]);
+
+	Route::post('/add-family', [
+		'uses' => 'PeopleController@store'
+	]);
+
+});

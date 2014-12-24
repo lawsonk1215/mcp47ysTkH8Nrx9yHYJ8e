@@ -23,7 +23,7 @@
 
         </div>
 
-        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+        <div class="navbar-buttons navbar-header pull-right hidden-xs" role="navigation">
             <ul class="nav ace-nav">
 
                 <li class="light-blue">
