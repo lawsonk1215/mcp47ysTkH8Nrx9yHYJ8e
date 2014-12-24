@@ -47,20 +47,9 @@
 
                                     <div class="space-2"></div>
 
-                                    <select multiple="multiple" name="people[]" id="form-field-select-4" class="chosen-select">
-                                        @foreach($family as $familyId => $familyName)
-                                        <option value="{{ $familyId }}"
-                                            @foreach($picture->people as $personId => $personName)
-                                                @if ($personId === $familyId)
-                                                    selected="selected"
 
-                                                @endif
-                                            @endforeach
 
-                                        >{{ $familyName }}</option>
-                                            
-                                        @endforeach
-                                    </select>
+                                    {{ Form::select('people[]', $family, $picture->people->lists('person_id'), ['multiple' => '', 'class' => 'chosen-select', 'id' => 'form-field-select-4']) }}
                                 </div>
 
                                 <div class="space-20"></div>
@@ -117,47 +106,6 @@ jQuery(function($)
                  $this.next().css({'width': $this.parent().width()});
             })
         }).trigger('resize.chosen');
-
-    $('#input-file').ace_file_input({
-        style:'well',
-        btn_choose:'Drop files here or click to choose',
-        btn_change:null,
-        no_icon:'ace-icon fa fa-cloud-upload',
-        droppable:true,
-        thumbnail:'small'//large | fit
-        //,icon_remove:null//set null, to hide remove/reset button
-        /**,before_change:function(files, dropped) {
-            //Check an example below
-            //or examples/file-upload.html
-            return true;
-        }*/
-        /**,before_remove : function() {
-            return true;
-        }*/
-        ,
-        preview_error : function(filename, error_code) {
-            //name of the file that failed
-            //error_code values
-            //1 = 'FILE_LOAD_FAILED',
-            //2 = 'IMAGE_LOAD_FAILED',
-            //3 = 'THUMBNAIL_FAILED'
-            //alert(error_code);
-        }
-
-    }).on('change', function(){
-        //console.log($(this).data('ace_input_files'));
-        //console.log($(this).data('ace_input_method'));
-    });
-    
-            
-            
-
-    $('#chosen-multiple-style').on('click', function(e){
-        var target = $(e.target).find('input[type=radio]');
-        var which = parseInt(target.val());
-        if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-         else $('#form-field-select-4').removeClass('tag-input-style');
-    });
 
 });
 </script>

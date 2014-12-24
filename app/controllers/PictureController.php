@@ -116,7 +116,7 @@ class PictureController extends \BaseController {
 	public function edit($id)
 	{
 		$picture = Picture::with(['people' => function($q) {
-			$q->lists('name', 'person_id');
+			$q->lists('person_id');
 		}])->find($id);
 		$family = Person::lists('name', 'id');
 		return View::make('edit-picture')

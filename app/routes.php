@@ -37,6 +37,11 @@ Route::get('/image-factory', function()
 
 /********************** Login Layout Routes ************************/
 
+
+Route::get('/', function()
+{
+	return Redirect::to('slideshow');
+});
 /**
  * Login Form
  */
@@ -50,7 +55,7 @@ Route::post('/login', [
 ]);
 
 
-Route::get('/', [
+Route::get('/slideshow', [
 	'uses' => 'PictureController@slideshow'
 ]);
 
