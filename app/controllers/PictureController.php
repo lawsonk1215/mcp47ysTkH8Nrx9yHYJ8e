@@ -10,7 +10,7 @@ class PictureController extends \BaseController {
 	 */
 	public function slideshow()
 	{
-		$pictures = Picture::all();
+		$pictures = Picture::orderByRaw("RAND()")->get();
 		return View::make('slideshow')
 			->withPictures($pictures);
 	}
@@ -29,9 +29,9 @@ class PictureController extends \BaseController {
 			{
 				$q->whereIn('person_id', $people);
 
-			})->get();
+			})->orderBy('updated_at', 'DESC')->get();
 		} else {
-			$pictures = Picture::all();
+			$pictures = Picture::orderBy('updated_at', 'DESC')->get();
 		}
 		$family = Person::lists('name', 'id');
 		return View::make('gallery')
