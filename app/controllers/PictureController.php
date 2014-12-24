@@ -35,6 +35,7 @@ class PictureController extends \BaseController {
 		}
 		$family = Person::lists('name', 'id');
 		return View::make('gallery')
+			->withPeople($people)
 			->withFamily($family)
 			->withPictures($pictures);
 	}

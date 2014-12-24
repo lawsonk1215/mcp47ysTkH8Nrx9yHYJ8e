@@ -36,7 +36,7 @@
                       {{ Form::submit('Filter', ['class'=>'btn btn-sm pull-right btn-primary']) }}
 
                       <div class="col-md-4 pull-right">
-                        {{ Form::select('people[]', $family, null, ['multiple' => '', 'class' => 'chosen-select', 'id' => 'form-field-select-4']) }}
+                        {{ Form::select('people[]', $family, $people, ['multiple' => '', 'class' => 'chosen-select', 'id' => 'form-field-select-4']) }}
                       </div>
 
                       <label class="col-md-2 pull-right text-right" for="form-field-select-4">Filter by people</label>
