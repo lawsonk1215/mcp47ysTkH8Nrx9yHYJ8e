@@ -47,7 +47,14 @@
 
                                     <div class="space-2"></div>
 
-                                    {{ Form::select('people[]', $family, $picture->people, ['multiple' => '', 'class' => 'chosen-select', 'id' => 'form-field-select-4']) }}
+                                    <select multiple="multiple" name="people[]" id="form-field-select-4" class="chosen-select">
+                                        @foreach($family as $familyId => $familyName)
+                                        <option value="{{ $familyId }}">{{ $familyName }}</option>
+                                            @foreach($picture->people as $personId => $personName)
+
+                                            @endforeach
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="space-20"></div>
