@@ -42,6 +42,12 @@ Route::get('/', function()
 {
 	return Redirect::to('slideshow');
 });
+
+Route::get('/defaultsite', function()
+{
+	return Redirect::to('slideshow');
+});
+
 /**
  * Login Form
  */
